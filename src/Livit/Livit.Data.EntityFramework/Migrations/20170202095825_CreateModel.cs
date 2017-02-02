@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Livit.Data.EntityFramework.Migrations
 {
-    public partial class Initialization : Migration
+    public partial class CreateModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,8 +14,8 @@ namespace Livit.Data.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Email = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(maxLength: 300, nullable: false),
+                    Name = table.Column<string>(maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,9 +28,13 @@ namespace Livit.Data.EntityFramework.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(nullable: true),
+                    AppliedFrom = table.Column<DateTime>(nullable: false),
+                    AppliedTo = table.Column<DateTime>(nullable: false),
+                    ApprovedDate = table.Column<DateTime>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Description = table.Column<string>(maxLength: 1000, nullable: false),
                     EmployeeId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {

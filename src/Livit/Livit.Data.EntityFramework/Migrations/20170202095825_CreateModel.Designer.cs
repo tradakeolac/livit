@@ -8,8 +8,8 @@ using Livit.Data.EntityFramework;
 namespace Livit.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(LivitDbContext))]
-    [Migration("20170202070326_Initialization")]
-    partial class Initialization
+    [Migration("20170202095825_CreateModel")]
+    partial class CreateModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,9 +21,13 @@ namespace Livit.Data.EntityFramework.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(300);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(300);
 
                     b.HasKey("Id");
 
@@ -35,11 +39,23 @@ namespace Livit.Data.EntityFramework.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description");
+                    b.Property<DateTime>("AppliedFrom");
+
+                    b.Property<DateTime>("AppliedTo");
+
+                    b.Property<DateTime>("ApprovedDate");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000);
 
                     b.Property<int>("EmployeeId");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(300);
 
                     b.HasKey("Id");
 
