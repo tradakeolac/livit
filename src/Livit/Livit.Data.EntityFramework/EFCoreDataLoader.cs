@@ -10,13 +10,13 @@
 
     public class EFCoreDataLoader : IDataLoaderRepository, IAsyncDataLoader
     {
-        protected DbContext DbContext;
+        protected LivitDbContext DbContext;
         protected DbSet<TEntity> DbSet<TEntity>() where TEntity : class
         {
             return DbContext.Set<TEntity>();
         }
         
-        public EFCoreDataLoader(DbContext dbContext)
+        public EFCoreDataLoader(LivitDbContext dbContext)
         {
             this.DbContext = dbContext;
         }

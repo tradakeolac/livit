@@ -34,7 +34,8 @@ namespace Livit.Web.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             // Add services to the collection.
-            services.AddMvc();
+            services.AddMvc()
+                .AddControllersAsServices();
 
             services.AddDbContext<LivitDbContext>(options => options.UseSqlite("FileName=./livit.db"));
 

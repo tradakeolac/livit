@@ -13,13 +13,13 @@
         /// <summary> 
         /// The DbContext 
         /// </summary> 
-        private DbContext _dbContext;
+        private LivitDbContext _dbContext;
 
         /// <summary> 
         /// Initializes a new instance of the UnitOfWork class. 
         /// </summary> 
         /// <param name="context">The object context</param> 
-        public EFCoreUnitOfWork(DbContext context)
+        public EFCoreUnitOfWork(LivitDbContext context)
         {
 
             _dbContext = context;

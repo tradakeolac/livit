@@ -9,10 +9,19 @@ namespace Livit.Web.Api.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        protected readonly Service.ILeaveManagementService LeaveManagementService;
+
+        public ValuesController(Service.ILeaveManagementService leaveManagementService)
+        {
+            this.LeaveManagementService = leaveManagementService;
+        }
+
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+
             return new string[] { "value1", "value2" };
         }
 

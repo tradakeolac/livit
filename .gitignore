@@ -1,3 +1,4 @@
-src/Livit/Livit.Web.Api/bin/Debug/netcoreapp1.1/Livit.Infrastructure.pdb
 bin/
 obj/
+*.suo
+.vs/

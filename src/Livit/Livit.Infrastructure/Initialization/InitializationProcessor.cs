@@ -63,7 +63,7 @@
             var assemblies = new List<Assembly>();
             foreach(var library in dependencies)
             {
-                if(library.Name.StartsWith("Livit."))
+                if(library.Name.ToLower().StartsWith("livit."))
                 {
                     var asem = Assembly.Load(new AssemblyName(library.Name));
                     assemblies.Add(asem);

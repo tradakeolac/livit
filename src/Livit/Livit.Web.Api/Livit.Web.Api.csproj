@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Livit.Data.EntityFramework\Livit.Data.EntityFramework.csproj" />
     <ProjectReference Include="..\Livit.Infrastructure\Livit.Infrastructure.csproj" />
+    <ProjectReference Include="..\Livit.Service\Livit.Service.csproj" />
     <ProjectReference Include="..\Livit.Web.Infrastructure\Livit.Web.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

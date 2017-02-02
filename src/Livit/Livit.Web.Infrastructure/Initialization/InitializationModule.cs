@@ -7,6 +7,8 @@
     using Livit.Web.Infrastructure.Factories;
     using Livit.Web.ViewModel;
     using Livit.Model.ServiceObjects;
+    using Livit.Data.Repositories.Abstractions;
+    using Livit.Data.EntityFramework;
 
     [InitializableModule]
     public class InitializationModule : Livit.Infrastructure.Initialization.IInitializableModule
@@ -16,6 +18,9 @@
             context.Services.AddSingleton<IEntityFactory, AutoMapperObjectFactory>();
             context.Services.AddSingleton<IViewModelFactory, AutoMapperObjectFactory>();
             context.Services.AddSingleton<IServiceObjectFactory, AutoMapperObjectFactory>();
+
+            context.Services.AddScoped<IAsyncDataLoader, EFCoreDataLoader>();
+            context.Services.AddScoped<IAsyncUnitOfWork, EFCoreUnitOfWork>();
         }
 
         public void UnInitialize(InitializationContext context)

@@ -6,7 +6,7 @@
 
     public class EFCoreRepository : EFCoreDataLoader, IRepository
     {
-        public EFCoreRepository(DbContext dbContext) : base(dbContext)
+        public EFCoreRepository(LivitDbContext dbContext) : base(dbContext)
         {
         }
 
