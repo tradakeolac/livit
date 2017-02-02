@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.0.0" />
+    <PackageReference Include="AutoMapper" Version="5.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Livit.Infrastructure\Livit.Infrastructure.csproj" />
+    <ProjectReference Include="..\Livit.Model\Livit.Model.csproj" />
+    <ProjectReference Include="..\Livit.Web.ViewModel\Livit.Web.ViewModel.csproj" />
+  </ItemGroup>
+</Project>
