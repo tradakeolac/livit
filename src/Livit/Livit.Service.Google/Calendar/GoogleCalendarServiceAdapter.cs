@@ -12,7 +12,6 @@
     using System;
     using System.Collections.Generic;
     using System.Net.Http;
-    using System.Text;
     using System.Threading.Tasks;
 
     public class GoogleCalendarServiceAdapter
@@ -33,7 +32,6 @@
             task.Wait();
 
             tokenA = task.Result;
-
 
             var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
             {

@@ -24,6 +24,8 @@
             context.Services.AddScoped<IRepository, EFCoreRepository>();
             context.Services.AddScoped<IAsyncUnitOfWork, EFCoreUnitOfWork>();
             context.Services.AddScoped<IUnitOfWork, EFCoreUnitOfWork>();
+
+            AutoMapperConfiguration.Config();
         }
 
         public void UnInitialize(InitializationContext context)
