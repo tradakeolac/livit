@@ -1,8 +1,9 @@
-﻿namespace Livit.Data.Repositories.Abstractions
+﻿namespace Livit.Data.Repositories
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Livit.Data.Specifications;
+
     public interface IAsyncDataLoader
     {
         /// <summary> 

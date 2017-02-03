@@ -1,4 +1,4 @@
-﻿namespace Livit.Data.Repositories.Abstractions
+﻿namespace Livit.Data.Repositories
 {
     using System;
 

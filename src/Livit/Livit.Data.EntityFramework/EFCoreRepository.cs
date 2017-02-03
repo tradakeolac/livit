@@ -1,6 +1,6 @@
 ﻿namespace Livit.Data.EntityFramework
 {
-    using Livit.Data.Repositories.Abstractions;
+    using Livit.Data.Repositories;
     using Livit.Data.Specifications;
     using Microsoft.EntityFrameworkCore;
 

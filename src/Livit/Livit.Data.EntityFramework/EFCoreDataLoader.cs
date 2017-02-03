@@ -4,7 +4,7 @@
     using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
-    using Livit.Data.Repositories.Abstractions;
+    using Livit.Data.Repositories;
     using Livit.Data.Specifications;
     using Microsoft.EntityFrameworkCore;
 

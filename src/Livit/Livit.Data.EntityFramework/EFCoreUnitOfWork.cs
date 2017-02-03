@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Livit.Data.Repositories.Abstractions;
+    using Livit.Data.Repositories;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary> 

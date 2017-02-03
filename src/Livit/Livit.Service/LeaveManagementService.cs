@@ -1,6 +1,6 @@
 ﻿namespace Livit.Service
 {
-    using Livit.Data.Repositories.Abstractions;
+    using Livit.Data.Repositories;
 
     public class LeaveManagementService : LivitServiceBase, ILeaveManagementService
     {
