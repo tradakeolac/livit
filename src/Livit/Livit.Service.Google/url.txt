@@ -1,1 +1,0 @@
-﻿https://accounts.google.com/o/oauth2/auth?access_type=offline&response_type=code&client_id=497145328019-7dl84cpo4d6n09ce2kdh34v46kvvmfm9.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https:%2F%2Fwww.googleapis.com%2Fauth%2Fcalendar.readonly
