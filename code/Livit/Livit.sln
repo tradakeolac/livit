@@ -1,0 +1,90 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AB241928-0C89-4148-B46E-5C825DF0A2A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C14CFAB4-A6D8-4FBA-BF4A-5D72B67E53D5}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Livit.Web.Api", "src\Livit.Web.Api\Livit.Web.Api.xproj", "{D9B734CC-992C-4C70-AC92-2D92739F6D0E}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Livit.Data", "src\Livit.Data\Livit.Data.xproj", "{E157E650-86F2-40DF-A737-2AD238621F69}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Livit.Data.EntityFramework", "src\Livit.Data.EntityFramework\Livit.Data.EntityFramework.xproj", "{76A68BC0-8C93-411D-AC39-AC1CAD263572}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Livit.Infrastructure", "src\Livit.Infrastructure\Livit.Infrastructure.xproj", "{A2D8A823-24E4-4E21-A8F3-FD53397089E7}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Livit.Model", "src\Livit.Model\Livit.Model.xproj", "{A814A138-C628-48C4-A70C-696A33467304}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Livit.Service", "src\Livit.Service\Livit.Service.xproj", "{132DF9FC-C68B-433C-B494-7D82581B4A11}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Livit.Service.Google", "src\Livit.Service.Google\Livit.Service.Google.xproj", "{6C0302AA-E7D5-46B0-A0BD-BFA4E6B8633B}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Livit.Web.Infrastructure", "src\Livit.Web.Infrastructure\Livit.Web.Infrastructure.xproj", "{31AE2BA8-C43E-4F09-801C-0C02253DE4D6}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Livit.Web.ViewModel", "src\Livit.Web.ViewModel\Livit.Web.ViewModel.xproj", "{B71E9612-92E5-407F-A3CB-102C48232947}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{923F4EC0-7270-42FC-B686-78B186BA4300}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9B734CC-992C-4C70-AC92-2D92739F6D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9B734CC-992C-4C70-AC92-2D92739F6D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9B734CC-992C-4C70-AC92-2D92739F6D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9B734CC-992C-4C70-AC92-2D92739F6D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E157E650-86F2-40DF-A737-2AD238621F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E157E650-86F2-40DF-A737-2AD238621F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E157E650-86F2-40DF-A737-2AD238621F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E157E650-86F2-40DF-A737-2AD238621F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76A68BC0-8C93-411D-AC39-AC1CAD263572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76A68BC0-8C93-411D-AC39-AC1CAD263572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76A68BC0-8C93-411D-AC39-AC1CAD263572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76A68BC0-8C93-411D-AC39-AC1CAD263572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2D8A823-24E4-4E21-A8F3-FD53397089E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2D8A823-24E4-4E21-A8F3-FD53397089E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2D8A823-24E4-4E21-A8F3-FD53397089E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2D8A823-24E4-4E21-A8F3-FD53397089E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A814A138-C628-48C4-A70C-696A33467304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A814A138-C628-48C4-A70C-696A33467304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A814A138-C628-48C4-A70C-696A33467304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A814A138-C628-48C4-A70C-696A33467304}.Release|Any CPU.Build.0 = Release|Any CPU
+		{132DF9FC-C68B-433C-B494-7D82581B4A11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{132DF9FC-C68B-433C-B494-7D82581B4A11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{132DF9FC-C68B-433C-B494-7D82581B4A11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{132DF9FC-C68B-433C-B494-7D82581B4A11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C0302AA-E7D5-46B0-A0BD-BFA4E6B8633B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C0302AA-E7D5-46B0-A0BD-BFA4E6B8633B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C0302AA-E7D5-46B0-A0BD-BFA4E6B8633B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C0302AA-E7D5-46B0-A0BD-BFA4E6B8633B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31AE2BA8-C43E-4F09-801C-0C02253DE4D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31AE2BA8-C43E-4F09-801C-0C02253DE4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31AE2BA8-C43E-4F09-801C-0C02253DE4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31AE2BA8-C43E-4F09-801C-0C02253DE4D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B71E9612-92E5-407F-A3CB-102C48232947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B71E9612-92E5-407F-A3CB-102C48232947}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B71E9612-92E5-407F-A3CB-102C48232947}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B71E9612-92E5-407F-A3CB-102C48232947}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D9B734CC-992C-4C70-AC92-2D92739F6D0E} = {AB241928-0C89-4148-B46E-5C825DF0A2A9}
+		{E157E650-86F2-40DF-A737-2AD238621F69} = {AB241928-0C89-4148-B46E-5C825DF0A2A9}
+		{76A68BC0-8C93-411D-AC39-AC1CAD263572} = {AB241928-0C89-4148-B46E-5C825DF0A2A9}
+		{A2D8A823-24E4-4E21-A8F3-FD53397089E7} = {AB241928-0C89-4148-B46E-5C825DF0A2A9}
+		{A814A138-C628-48C4-A70C-696A33467304} = {AB241928-0C89-4148-B46E-5C825DF0A2A9}
+		{132DF9FC-C68B-433C-B494-7D82581B4A11} = {AB241928-0C89-4148-B46E-5C825DF0A2A9}
+		{6C0302AA-E7D5-46B0-A0BD-BFA4E6B8633B} = {AB241928-0C89-4148-B46E-5C825DF0A2A9}
+		{31AE2BA8-C43E-4F09-801C-0C02253DE4D6} = {AB241928-0C89-4148-B46E-5C825DF0A2A9}
+		{B71E9612-92E5-407F-A3CB-102C48232947} = {AB241928-0C89-4148-B46E-5C825DF0A2A9}
+	EndGlobalSection
+EndGlobal

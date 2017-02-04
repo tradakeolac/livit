@@ -1,0 +1,22 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Autofac.Extensions.DependencyInjection": "4.0.0",
+    "AutoMapper": "5.2.0",
+    "Livit.Data": "1.0.0-*",
+    "Livit.Data.EntityFramework": "1.0.0-*",
+    "Livit.Infrastructure": "1.0.0-*",
+    "Livit.Model": "1.0.0-*",
+    "Livit.Service": "1.0.0-*",
+    "Livit.Service.Google": "1.0.0-*",
+    "Livit.Web.ViewModel": "1.0.0-*",
+    "NETStandard.Library": "1.6.0"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}
