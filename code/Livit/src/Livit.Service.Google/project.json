@@ -2,12 +2,13 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "AutoMapper": "5.2.0",
     "Google.Apis.Calendar.v3": "1.20.0.759",
     "Livit.Data": "1.0.0-*",
     "Livit.Infrastructure": "1.0.0-*",
     "Livit.Model": "1.0.0-*",
     "Livit.Service": "1.0.0-*",
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.1"
   },
 
   "frameworks": {

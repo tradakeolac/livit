@@ -11,7 +11,7 @@
     "Livit.Service": "1.0.0-*",
     "Livit.Service.Google": "1.0.0-*",
     "Livit.Web.ViewModel": "1.0.0-*",
-    "NETStandard.Library": "1.6.0"
+    "NETStandard.Library": "1.6.1"
   },
 
   "frameworks": {
