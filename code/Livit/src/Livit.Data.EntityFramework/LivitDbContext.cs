@@ -7,6 +7,7 @@
     {
         public DbSet<EmployeeEntity> Employees { get; set; }
         public DbSet<RequestedLeaveEntity> Leaves { get; set; }
+        public DbSet<TokenResponseEntity> Tokens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -53,6 +54,14 @@
 
             modelBuilder.Entity<RequestedLeaveEntity>()
                 .Property(m => m.EmployeeId)
+                .IsRequired();
+
+            // Token
+            modelBuilder.Entity<TokenResponseEntity>()
+                .HasKey(m => m.Id);
+
+            modelBuilder.Entity<TokenResponseEntity>()
+                .Property(m => m.AccessToken)
                 .IsRequired();
 
             base.OnModelCreating(modelBuilder);

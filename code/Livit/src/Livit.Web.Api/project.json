@@ -25,7 +25,8 @@
     "Livit.Web.ViewModel": "1.0.0-*",
     "Autofac.Extensions.DependencyInjection": "4.0.0",
     "Microsoft.EntityFrameworkCore": "1.1.0",
-    "Microsoft.EntityFrameworkCore.Sqlite.Design": "1.1.0"
+    "Microsoft.EntityFrameworkCore.Sqlite.Design": "1.1.0",
+    "Microsoft.AspNetCore.Mvc.Versioning": "1.0.3"
   },
 
   "tools": {

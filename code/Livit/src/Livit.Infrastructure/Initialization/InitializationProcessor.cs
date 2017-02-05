@@ -1,6 +1,7 @@
 ﻿namespace Livit.Infrastructure.Initialization
 {
     using Attributes;
+    using Helpers;
     using Microsoft.Extensions.DependencyModel;
     using System;
     using System.Collections.Generic;
@@ -49,28 +50,12 @@
         private static IEnumerable<Type> GetInitializableModules()
         {
             var initializableType = typeof(IInitializableModule);
-            var concreteTypes = GetExecutingAssemblies()
+            var concreteTypes = AssemblyHelper.LoadCodingAssemblies()
                 .SelectMany(s => s.GetTypes())
                 .Where(p => initializableType.IsAssignableFrom(p)
                 && p.GetTypeInfo().IsClass
                 && p.GetTypeInfo().GetCustomAttributes(false).Count(a => a is InitializableModuleAttribute) > 0);
             return concreteTypes;
-        }
-
-        private static IEnumerable<Assembly> GetExecutingAssemblies()
-        {
-            var dependencies = DependencyContext.Default.CompileLibraries;
-            var assemblies = new List<Assembly>();
-            foreach (var library in dependencies)
-            {
-                if (library.Name.ToLower().StartsWith("livit."))
-                {
-                    var asem = Assembly.Load(new AssemblyName(library.Name));
-                    assemblies.Add(asem);
-                }
-            }
-
-            return assemblies;
         }
     }
 }

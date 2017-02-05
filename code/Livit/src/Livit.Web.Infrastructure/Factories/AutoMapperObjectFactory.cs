@@ -1,5 +1,6 @@
 ﻿namespace Livit.Web.Infrastructure.Factories
 {
+    using AutoMapper;
     using Livit.Model.Entities;
     using Livit.Model.ServiceObjects;
     using Livit.Web.ViewModel;
@@ -7,9 +8,16 @@
 
     public class AutoMapperObjectFactory : IServiceObjectFactory, IEntityFactory, IViewModelFactory, IGoogleObjectFactory
     {
-        public TDestination Create<TDestination>(object source) where TDestination : class, new()
+        private readonly IMapper mapper;
+
+        public AutoMapperObjectFactory(IMapper mapper)
         {
-            return AutoMapper.Mapper.Map<TDestination>(source);
+            this.mapper = mapper;
+        }
+
+        public TDestination Create<TDestination>(object source)
+        {
+            return mapper.Map<TDestination>(source);
         }
     }
 }

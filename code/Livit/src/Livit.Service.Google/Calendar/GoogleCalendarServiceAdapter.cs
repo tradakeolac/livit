@@ -15,33 +15,40 @@
     using System.Threading.Tasks;
     using Data.Repositories;
     using Model.ServiceObjects;
+    using global::Google.Apis.Util.Store;
+    using Model.Entities;
 
     public class GoogleCalendarServiceAdapter : LeaveManagementService, ILeaveManagementService
     {
-        // If modifying these scopes, delete your previously saved credentials
-        // at ~/.credentials/calendar-dotnet-quickstart.json
         static string[] Scopes = { CalendarService.Scope.Calendar };
         static string ApplicationName = "Google Calendar API .NET Quickstart";
 
-        private readonly IGoogleObjectFactory ObjectFactory;
+        protected readonly IGoogleObjectFactory ObjectFactory;
+        protected readonly HttpClient HttpClient;
+        protected readonly IRepository Repository;
+        protected readonly IDataStore DataStore;
 
-        public GoogleCalendarServiceAdapter(IAsyncUnitOfWork unitOfWork, IAsyncDataLoader dataLoader, IGoogleObjectFactory objectFactory)
+        public GoogleCalendarServiceAdapter(IAsyncUnitOfWork unitOfWork,
+            IAsyncDataLoader dataLoader, IGoogleObjectFactory objectFactory,
+            IRepository repository, HttpClient httpClient, IDataStore dataStore)
             : base(unitOfWork, dataLoader)
         {
+            this.Repository = repository;
             this.ObjectFactory = objectFactory;
+            this.HttpClient = httpClient;
+            this.DataStore = dataStore;
         }
 
-        static void Main(string[] args)
+        private async Task<CalendarService> GetCalendarService(string email)
         {
             UserCredential credential = null;
 
-            TokenEntity tokenA = null;
+            var token = await this.DataStore.GetAsync<TokenResponseEntity>(email);
 
-            var task = GetValue();
-
-            task.Wait();
-
-            tokenA = task.Result;
+            if (token == null)
+            {
+                token = ObjectFactory.Create<TokenResponseEntity>(await GetValue());
+            }
 
             var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
             {
@@ -51,99 +58,22 @@
                     ClientSecret = "tSpThzSrFZRecmP2agrewfwk"
                 },
                 Scopes = Scopes,
-                DataStore = new DatabaseDataStore(null, null, null)
+                DataStore = this.DataStore
             });
 
-            var token = new TokenResponse
-            {
-                AccessToken = tokenA.AccessToken,
-                RefreshToken = tokenA.RefreshToken
-            };
-
-            credential = new UserCredential(flow, "user", token);
+            credential = new UserCredential(flow, email, ObjectFactory.Create<TokenResponse>(token));
 
             // Create Google Calendar API service.
-            var service = new CalendarService(new BaseClientService.Initializer
+            return await Task.FromResult(new CalendarService(new BaseClientService.Initializer
             {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName
-            });
-
-            // Define parameters of request.
-            var request = service.Events.List("primary");
-            request.TimeMin = DateTime.Now;
-            request.ShowDeleted = false;
-            request.SingleEvents = true;
-            request.MaxResults = 10;
-            request.OrderBy = EventsResource.ListRequest.OrderByEnum.StartTime;
-
-            // List events.
-            var events = request.Execute();
-            Console.WriteLine("Upcoming events:");
-            if (events.Items != null && events.Items.Count > 0)
-            {
-                foreach (var eventItem in events.Items)
-                {
-                    var when = eventItem.Start.DateTime.ToString();
-                    if (string.IsNullOrEmpty(when))
-                    {
-                        when = eventItem.Start.Date;
-                    }
-                    Console.WriteLine("{0} ({1})", eventItem.Summary, when);
-                }
-            }
-            else
-            {
-                Console.WriteLine("No upcoming events found.");
-            }
-            Console.Read();
+            }));
         }
 
-        private CalendarService CalendarService
+        private async Task<TokenResponse> GetValue()
         {
-            get
-            {
-                UserCredential credential = null;
-
-                TokenEntity tokenA = null;
-
-                var task = GetValue();
-
-                task.Wait();
-
-                tokenA = task.Result;
-
-                var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
-                {
-                    ClientSecrets = new ClientSecrets
-                    {
-                        ClientId = "497145328019-7dl84cpo4d6n09ce2kdh34v46kvvmfm9.apps.googleusercontent.com",
-                        ClientSecret = "tSpThzSrFZRecmP2agrewfwk"
-                    },
-                    Scopes = Scopes,
-                    DataStore = new DatabaseDataStore(null, null, null)
-                });
-
-                var token = new TokenResponse
-                {
-                    AccessToken = tokenA.AccessToken,
-                    RefreshToken = tokenA.RefreshToken
-                };
-
-                credential = new UserCredential(flow, "user", token);
-
-                // Create Google Calendar API service.
-                return new CalendarService(new BaseClientService.Initializer
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = ApplicationName
-                });
-            }
-        }
-
-        private static async Task<TokenEntity> GetValue()
-        {
-            string code = "4/CjKkR1joCQfAWlx-CskRtQZvjIoC-Q6ctT9vHsZXhUo";
+            string code = "4/WeQUyU-l8SNmL5FslDJQ5pP_NCTzCB9NFJ6QIbw0NM4";
 
             var dic = new Dictionary<string, string>
             {
@@ -156,55 +86,32 @@
 
             var formContent = new FormUrlEncodedContent(dic);
 
-            var httpClient = new HttpClient();
-            var response = await httpClient.PostAsync("https://accounts.google.com/o/oauth2/token", formContent);
+            var response = await this.HttpClient.PostAsync("https://accounts.google.com/o/oauth2/token", formContent);
             response.EnsureSuccessStatusCode();
 
             var result = await response.Content.ReadAsStringAsync();
 
-            var token = JsonConvert.DeserializeObject<TokenEntity>(result);
+            var token = JsonConvert.DeserializeObject<TokenResponse>(result);
 
             return await Task.FromResult(token);
         }
 
-        public override async Task<bool> AddLeaveRequest(Livit.Model.ServiceObjects.LeaveServiceObject leaveObject)
+        public override async Task<bool> AddLeaveRequest(LeaveServiceObject leaveObject)
         {
-            //Event newEvent = new Event
-            //{
-            //    Summary = "Google I/O 2015",
-            //    Location = "800 Howard St., San Francisco, CA 94103",
-            //    Description = "A chance to hear more about Google's developer products.",
-            //    Start = new EventDateTime
-            //    {
-            //        DateTime = DateTime.Parse("2015-05-28T09:00:00-07:00"),
-            //        TimeZone = "America/Los_Angeles"
-            //    },
-            //    End = new EventDateTime
-            //    {
-            //        DateTime = DateTime.Parse("2015-05-28T17:00:00-07:00"),
-            //        TimeZone = "America/Los_Angeles"
-            //    },
-            //    Recurrence = new string[] { "RRULE:FREQ=DAILY;COUNT=2" },
-            //    Attendees = new EventAttendee[] {
-            //        new EventAttendee { Email = "lpage@example.com" },
-            //        new EventAttendee { Email = "sbrin@example.com" }
-            //    },
-            //    Reminders = new Event.RemindersData
-            //    {
-            //        UseDefault = false,
-            //        Overrides = new EventReminder[] {
-            //            new EventReminder { Method = "email", Minutes = 24 * 60 },
-            //            new EventReminder { Method = "sms", Minutes = 10 }
-            //        }
-            //    }
-            //};
-
             var newEvent = this.ObjectFactory.Create<Event>(leaveObject);
 
-            string calendarId = Guid.NewGuid().ToString();
+            string calendarId = "primary";
 
-            EventsResource.InsertRequest request = CalendarService.Events.Insert(newEvent, calendarId);
-            var createdEvent = await request.ExecuteAsync();
+            var request = (await GetCalendarService(leaveObject.EmployeeEmail)).Events.Insert(newEvent, calendarId);
+            Event createdEvent = null;
+            try
+            {
+                createdEvent = await request.ExecuteAsync();
+            }
+            catch (Exception ex)
+            {
+
+            }
 
             return await Task.FromResult<bool>(createdEvent != null);
         }

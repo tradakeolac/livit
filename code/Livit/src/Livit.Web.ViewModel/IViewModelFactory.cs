@@ -2,6 +2,6 @@
 {
     public interface IViewModelFactory
     {
-        TViewModel Create<TViewModel>(object serviceObject) where TViewModel : class, new();
+        TViewModel Create<TViewModel>(object serviceObject);
     }
 }

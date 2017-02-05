@@ -2,6 +2,6 @@
 {
     public interface IGoogleObjectFactory
     {
-        TGoogleEntity Create<TGoogleEntity>(object source) where TGoogleEntity : class, new();
+        TGoogleEntity Create<TGoogleEntity>(object source);
     }
 }
