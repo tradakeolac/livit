@@ -7,12 +7,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Diagnostics;
 using Autofac;
 using Livit.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Livit.Infrastructure.Initialization;
 using Autofac.Extensions.DependencyInjection;
 using Livit.Web.Infrastructure.DependencyInjection;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace Livit.Web.Api
 {
@@ -39,6 +42,8 @@ namespace Livit.Web.Api
             // Add services to the collection.
             services.AddMvc()
                 .AddControllersAsServices();
+
+            services.AddApiVersioning();
 
             services.AddDbContext<LivitDbContext>(options => options.UseSqlite("FileName=./livit.db"));
 
@@ -67,6 +72,8 @@ namespace Livit.Web.Api
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            
 
             app.UseMvc();
         }

@@ -8,7 +8,8 @@ using Livit.Model.ServiceObjects;
 
 namespace Livit.Web.Api.Controllers
 {
-    [Route("api/leaves")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/leaves")]
     public class LeaveManagementController : Controller
     {
         private readonly ILeaveManagementService LeaveManagementService;
@@ -28,7 +29,7 @@ namespace Livit.Web.Api.Controllers
                 EmployeeEmail = "nguyenthanhcongbkhn@gmail.com",
                 From = DateTime.Now,
                 To = DateTime.Now.AddDays(1),
-                Summary = "Nghi om"
+                Summary = "Cong xin nghi om!"
             };
 
             return await this.LeaveManagementService.AddLeaveRequest(leave);

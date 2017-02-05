@@ -4,7 +4,9 @@
     using Livit.Model.Entities;
     using Livit.Model.ServiceObjects;
     using Livit.Web.ViewModel;
+    using Service.Exceptions;
     using Service.Google.Models;
+    using System;
 
     public class AutoMapperObjectFactory : IServiceObjectFactory, IEntityFactory, IViewModelFactory, IGoogleObjectFactory
     {
@@ -17,7 +19,16 @@
 
         public TDestination Create<TDestination>(object source)
         {
-            return mapper.Map<TDestination>(source);
+            Guard.EnsureRequestNotNull(source, nameof(source));
+
+            try
+            {
+                return mapper.Map<TDestination>(source);
+            }
+            catch (Exception ex)
+            {
+                throw new MappingException($"Can not mapping to type {typeof(TDestination).Name} from source type {source.GetType().Name}");
+            }
         }
     }
 }
