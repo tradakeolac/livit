@@ -21,7 +21,7 @@ namespace Livit.Web.Api.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<bool> AddLeave()
+        public async Task<IActionResult> AddLeave()
         {
             var leave = new LeaveServiceObject
             {
@@ -32,7 +32,9 @@ namespace Livit.Web.Api.Controllers
                 Summary = "Cong xin nghi om!"
             };
 
-            return await this.LeaveManagementService.AddLeaveRequest(leave);
+            var result = await this.LeaveManagementService.AddLeaveRequest(leave);
+
+            return Ok(result);
         }
     }
 }

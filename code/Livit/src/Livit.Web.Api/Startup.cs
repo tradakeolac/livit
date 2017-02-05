@@ -16,6 +16,9 @@ using Autofac.Extensions.DependencyInjection;
 using Livit.Web.Infrastructure.DependencyInjection;
 using System.Net;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Options;
+using Livit.Web.Infrastructure.ErrorHandling;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Livit.Web.Api
 {
@@ -27,6 +30,7 @@ namespace Livit.Web.Api
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("client_secret.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
@@ -43,12 +47,23 @@ namespace Livit.Web.Api
             services.AddMvc()
                 .AddControllersAsServices();
 
+            // Register the Swagger generator, defining one or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Livit Leave Management Api", Version = "v1" });
+            });
+
             services.AddApiVersioning();
 
             services.AddDbContext<LivitDbContext>(options => options.UseSqlite("FileName=./livit.db"));
 
             // Create the container builder.
             var builder = new ContainerBuilder();
+
+            // Register services
+            builder.RegisterInstance(this.Configuration)
+                .As<IConfiguration>()
+                .SingleInstance();
 
             // Register dependencies, populate the services from
             // the collection, and build the container. If you want
@@ -73,9 +88,19 @@ namespace Livit.Web.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            
+            // Add error handling
+            app.UseContentNegotiateExceptionHandling();
 
             app.UseMvc();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUi(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Livit Leave Management Api V1");
+            });
         }
     }
 }
