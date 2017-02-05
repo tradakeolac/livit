@@ -18,11 +18,13 @@
 
         public GoogleCalendarServiceAdapter(IAsyncUnitOfWork unitOfWork,
             IAsyncDataLoader dataLoader, IRepository repository,
-            IGoogleCalendarServiceFactory serviceFactory)
+            IGoogleCalendarServiceFactory serviceFactory,
+            IGoogleObjectFactory objectFactory)
             : base(unitOfWork, dataLoader)
         {
             this.Repository = repository;
             this.ServiceFactory = serviceFactory;
+            this.ObjectFactory = objectFactory;
         }
 
         public override async Task<bool> AddLeaveRequest(LeaveServiceObject leaveObject)
@@ -30,8 +32,10 @@
             var newEvent = this.ObjectFactory.Create<Event>(leaveObject);
 
             string calendarId = "primary";
+            var service = await this.ServiceFactory.GetService(leaveObject.EmployeeEmail, leaveObject.AuthorizeCode);
 
-            var request = (await this.ServiceFactory.GetService(leaveObject.EmployeeEmail)).Events.Insert(newEvent, calendarId);
+            var request = service.Events.Insert(newEvent, calendarId);
+
             Event createdEvent = null;
             try
             {
@@ -39,7 +43,7 @@
             }
             catch (Exception ex)
             {
-                throw new AddActionException("Can not add the event to the calendar!");
+                throw new AddActionException("Can not add the event to the Google calendar!");
             }
 
             return await Task.FromResult<bool>(createdEvent != null);

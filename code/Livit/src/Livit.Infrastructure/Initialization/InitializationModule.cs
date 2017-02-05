@@ -1,5 +1,6 @@
 ﻿namespace Livit.Infrastructure.Initialization
 {
+    using Configurations;
     using Livit.Infrastructure.Attributes;
     using Livit.Infrastructure.Ultility;
 
@@ -10,6 +11,7 @@
         {
             // Register service
             context.Services.AddSingleton<IDateTimeAdapter, DateTimeAdapter>();
+            context.Services.AddSingleton<ILivitConfiguration, LivitConfiguration>();
         }
 
         public void UnInitialize(InitializationContext context)

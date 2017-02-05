@@ -3,6 +3,7 @@
     using Google.Apis.Calendar.v3.Data;
     using Livit.Model.Entities;
     using Livit.Model.ServiceObjects;
+    using ViewModel;
 
     class LeaveProfile : AutoMapper.Profile
     {
@@ -40,6 +41,10 @@
                     new EventAttendee { Email = src.EmployeeEmail }
                 }))
                 .ForAllOtherMembers(src => src.Ignore());
+
+
+            CreateMap<LeaveRequestViewModel, LeaveServiceObject>()
+                .ForMember(m => m.Id, obj => obj.Ignore());
         }
     }
 }

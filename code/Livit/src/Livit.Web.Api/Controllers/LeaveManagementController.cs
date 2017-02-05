@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Livit.Service;
 using Livit.Model.ServiceObjects;
+using Livit.Web.ViewModel;
 
 namespace Livit.Web.Api.Controllers
 {
@@ -12,27 +13,28 @@ namespace Livit.Web.Api.Controllers
     [Route("api/v{version:apiVersion}/leaves")]
     public class LeaveManagementController : Controller
     {
-        private readonly ILeaveManagementService LeaveManagementService;
+        protected readonly ILeaveManagementService LeaveManagementService;
+        protected readonly IServiceObjectFactory ObjectFactory;
 
-        public LeaveManagementController(ILeaveManagementService leaveService)
+        public LeaveManagementController(ILeaveManagementService leaveService, IServiceObjectFactory objectFactory)
         {
             this.LeaveManagementService = leaveService;
+            this.ObjectFactory = objectFactory;
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddLeave()
+        public async Task<IActionResult> RequestLeave([FromBody] LeaveRequestViewModel leave)
         {
-            var leave = new LeaveServiceObject
-            {
-                Description = "Cong xin nghi om!",
-                EmployeeEmail = "nguyenthanhcongbkhn@gmail.com",
-                From = DateTime.Now,
-                To = DateTime.Now.AddDays(1),
-                Summary = "Cong xin nghi om!"
-            };
+            if (leave == null)
+                return BadRequest("Invalid request params");
 
-            var result = await this.LeaveManagementService.AddLeaveRequest(leave);
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var request = this.ObjectFactory.Create<LeaveServiceObject>(leave);
+
+            var result = await this.LeaveManagementService.AddLeaveRequest(request);
 
             return Ok(result);
         }

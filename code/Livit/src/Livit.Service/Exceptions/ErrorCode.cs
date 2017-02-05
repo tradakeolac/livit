@@ -9,6 +9,7 @@
         ArgumentNull = 202,
         Mapping = 203,
         NotFoundService = 404,
+        Common = 500,
         Unknow = 1000,
     }
 }

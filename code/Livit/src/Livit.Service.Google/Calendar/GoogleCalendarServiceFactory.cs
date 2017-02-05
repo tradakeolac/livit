@@ -12,25 +12,31 @@
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using Microsoft.Extensions.Configuration;
+    using Infrastructure.Configurations;
+    using Exceptions;
 
     public class GoogleCalendarServiceFactory : IGoogleCalendarServiceFactory
     {
         static string[] Scopes = { CalendarService.Scope.Calendar };
-        static string ApplicationName = "Google Calendar API .NET Quickstart";
+        static string ApplicationName = "Livit Leave Management Application";
 
         protected readonly IDataStore DataStore;
         protected readonly IGoogleObjectFactory ObjectFactory;
         protected readonly HttpClient HttpClient;
+        protected readonly ILivitConfiguration Configuration;
 
         public GoogleCalendarServiceFactory(IDataStore dataStore,
-            IGoogleObjectFactory objectFactory, HttpClient httpClient)
+            IGoogleObjectFactory objectFactory, HttpClient httpClient,
+            ILivitConfiguration configuration)
         {
             this.DataStore = dataStore;
             this.ObjectFactory = objectFactory;
             this.HttpClient = httpClient;
+            this.Configuration = configuration;
         }
 
-        public async Task<CalendarService> GetService(string email)
+        public async Task<CalendarService> GetService(string email, string authorizeCode)
         {
             UserCredential credential = null;
 
@@ -38,15 +44,20 @@
 
             if (token == null)
             {
-                token = ObjectFactory.Create<TokenResponseEntity>(await GetValue());
+                var responseToken = await FetchToken(authorizeCode);
+
+                if (responseToken == null)
+                    throw new CommonException("Can not fetch access_token from Google server.");
+
+                token = ObjectFactory.Create<TokenResponseEntity>(responseToken);
             }
 
             var flow = new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
             {
                 ClientSecrets = new ClientSecrets
                 {
-                    ClientId = "497145328019-7dl84cpo4d6n09ce2kdh34v46kvvmfm9.apps.googleusercontent.com",
-                    ClientSecret = "tSpThzSrFZRecmP2agrewfwk"
+                    ClientId = Configuration.Secrets.ClientId,
+                    ClientSecret = Configuration.Secrets.ClientSecret
                 },
                 Scopes = Scopes,
                 DataStore = this.DataStore
@@ -62,23 +73,29 @@
             }));
         }
 
-        private async Task<TokenResponse> GetValue()
+        private async Task<TokenResponse> FetchToken(string authorizeCode)
         {
-            string code = "4/WeQUyU-l8SNmL5FslDJQ5pP_NCTzCB9NFJ6QIbw0NM4";
+            if (string.IsNullOrWhiteSpace(authorizeCode))
+                throw new RequestArgumentNullException("The authorized_code is NULL.");
 
             var dic = new Dictionary<string, string>
             {
-                { "code", code },
-                { "client_id", "497145328019-7dl84cpo4d6n09ce2kdh34v46kvvmfm9.apps.googleusercontent.com" },
-                { "client_secret", "tSpThzSrFZRecmP2agrewfwk" },
+                { "code", authorizeCode },
+                { "client_id", Configuration.Secrets.ClientId },
+                { "client_secret", Configuration.Secrets.ClientSecret },
                 { "grant_type", "authorization_code" },
                 { "redirect_uri", "urn:ietf:wg:oauth:2.0:oob" }
             };
 
             var formContent = new FormUrlEncodedContent(dic);
 
-            var response = await this.HttpClient.PostAsync("https://accounts.google.com/o/oauth2/token", formContent);
+            var response = await this.HttpClient.PostAsync(Configuration.Secrets.TokenUri, formContent);
             response.EnsureSuccessStatusCode();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
 
             var result = await response.Content.ReadAsStringAsync();
 

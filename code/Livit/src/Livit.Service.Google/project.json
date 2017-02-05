@@ -8,6 +8,7 @@
     "Livit.Infrastructure": "1.0.0-*",
     "Livit.Model": "1.0.0-*",
     "Livit.Service": "1.0.0-*",
+    "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
     "NETStandard.Library": "1.6.1"
   },
 

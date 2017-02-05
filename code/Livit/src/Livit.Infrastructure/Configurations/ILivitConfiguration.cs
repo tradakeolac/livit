@@ -2,7 +2,6 @@
 {
     public interface ILivitConfiguration
     {
-        T Get<T>();
-        T Get<T>(string key);
+        LivitClientSecrets Secrets { get; }
     }
 }

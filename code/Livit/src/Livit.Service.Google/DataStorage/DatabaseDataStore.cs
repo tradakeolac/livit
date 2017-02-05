@@ -37,7 +37,7 @@
         public async Task<T> GetAsync<T>(string key)
         {
             var entity = await this.DataLoader.GetByIdAsync<TokenResponseEntity>(key);
-            return await Task.FromResult(this.EntityFactory.Create<T>(entity));
+            return entity == null ? default(T) : await Task.FromResult(this.EntityFactory.Create<T>(entity));
         }
 
         public async Task StoreAsync<T>(string key, T value)

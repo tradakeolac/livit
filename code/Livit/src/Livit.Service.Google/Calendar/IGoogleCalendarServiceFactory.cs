@@ -5,6 +5,6 @@
 
     public interface IGoogleCalendarServiceFactory
     {
-        Task<CalendarService> GetService(string email);
+        Task<CalendarService> GetService(string email, string authorizeCode);
     }
 }
