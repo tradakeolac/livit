@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Livit.Service;
 using Livit.Web.ViewModel;
 
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Livit.Web.Api.Controllers
 {
     [ApiVersion("1.0")]

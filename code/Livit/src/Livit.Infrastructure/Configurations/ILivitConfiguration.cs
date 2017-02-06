@@ -3,5 +3,7 @@
     public interface ILivitConfiguration
     {
         LivitClientSecrets Secrets { get; }
+        string AdminEmail { get; }
+        string DefaultTimeZone { get; }
     }
 }

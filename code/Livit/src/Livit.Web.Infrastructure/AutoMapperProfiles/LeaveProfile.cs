@@ -5,7 +5,7 @@
     using Livit.Model.ServiceObjects;
     using ViewModel;
 
-    class LeaveProfile : AutoMapper.Profile
+    public class LeaveProfile : AutoMapper.Profile
     {
         public LeaveProfile()
         {
@@ -37,7 +37,6 @@
                     }
                 }))
                 .ForMember(m => m.Attendees, obj => obj.MapFrom(src => new EventAttendee[] {
-                    new EventAttendee { Email = "mitom3bua@gmail.com" },
                     new EventAttendee { Email = src.EmployeeEmail }
                 }))
                 .ForAllOtherMembers(src => src.Ignore());

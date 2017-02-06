@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System;
+using Microsoft.Extensions.Configuration;
 
 namespace Livit.Infrastructure.Configurations
 {
@@ -10,6 +11,16 @@ namespace Livit.Infrastructure.Configurations
         public LivitConfiguration(IConfiguration configuration)
         {
             this.Configuration = configuration;
+        }
+
+        public string AdminEmail
+        {
+            get { return Configuration.GetValue<string>("AdminEmail"); }
+        }
+
+        public string DefaultTimeZone
+        {
+            get { return Configuration.GetValue<string>("DefaultTimeZone"); }
         }
 
         public LivitClientSecrets Secrets
