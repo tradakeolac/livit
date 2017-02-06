@@ -29,10 +29,11 @@ namespace Livit.Infrastructure.Configurations
             {
                 return new LivitClientSecrets
                 {
-                    ClientId = Configuration.GetSection($"installed:{LivitKeys.ClientId}").Value,
-                    ClientSecret = Configuration.GetSection($"installed:{LivitKeys.ClientSecret}").Value,
-                    AuthenUri = Configuration.GetSection("installed:auth_uri").Value,
-                    TokenUri = Configuration.GetSection("installed:token_uri").Value
+                    ClientId = Configuration.GetValue<string>($"web:{LivitKeys.ClientId}"),
+                    ClientSecret = Configuration.GetValue<string>($"web:{LivitKeys.ClientSecret}"),
+                    AuthenUri = Configuration.GetValue<string>($"web:{LivitKeys.AuthenUri}"),
+                    TokenUri = Configuration.GetValue<string>($"web:{LivitKeys.TokenUri}"),
+                    RedirectUri = Configuration.GetValue<string>($"web:{LivitKeys.RedirectUri}")
                 };
             }
         }

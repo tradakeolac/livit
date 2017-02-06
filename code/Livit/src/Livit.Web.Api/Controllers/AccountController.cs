@@ -27,5 +27,12 @@ namespace Livit.Web.Api.Controllers
 
             return Ok(new CalendarManagementGrantedUrlViewModel { Url = url });
         }
+
+        [Route("callback")]
+        [HttpGet]
+        public async Task<IActionResult> Callback(string code)
+        {
+            return null;
+        }
     }
 }

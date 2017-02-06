@@ -11,7 +11,6 @@
         public virtual DateTime AppliedFrom { get; set; }
         public virtual DateTime AppliedTo { get; set; }
         public virtual DateTime ApprovedDate { get; set; }
-
         public virtual EmployeeEntity Employee { get; set; }
     }
 }

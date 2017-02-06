@@ -5,6 +5,8 @@
 
     public interface ILeaveManagementService : IService
     {
-        Task<bool> AddLeaveRequest(LeaveServiceObject leaveObject);
+        Task<bool> RequestLeaveAsync(LeaveServiceObject leaveObject);
+        Task<bool> ApproveAsync(string eventId);
+        Task<bool> RejectAsync(string eventId);
     }
 }

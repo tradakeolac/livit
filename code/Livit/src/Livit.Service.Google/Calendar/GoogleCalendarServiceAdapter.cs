@@ -10,6 +10,7 @@
     using Exceptions;
     using Infrastructure.Configurations;
     using Infrastructure.Ultility;
+    using System.Linq;
 
     public class GoogleCalendarServiceAdapter : LeaveManagementService, ILeaveManagementService
     {
@@ -33,7 +34,7 @@
             this.LivitConfiguration = configuration;
         }
 
-        public override async Task<bool> AddLeaveRequest(LeaveServiceObject leaveObject)
+        public override async Task<bool> RequestLeaveAsync(LeaveServiceObject leaveObject)
         {
             var newEvent = this.ObjectFactory.Create<Event>(leaveObject);
 
@@ -43,11 +44,11 @@
             string calendarId = "primary";
             var service = await this.ServiceFactory.GetService(leaveObject.EmployeeEmail, leaveObject.AuthorizeCode);
 
+            Event createdEvent = null;
+
             try
             {
                 var request = service.Events.Insert(newEvent, calendarId);
-
-                Event createdEvent = null;
 
                 createdEvent = await request.ExecuteAsync();
             }
@@ -59,10 +60,37 @@
             return await Task.FromResult<bool>(createdEvent != null);
         }
 
+        public override async Task<bool> ApproveAsync(string eventId)
+        {
+            await this.UpdateAsync(eventId, "accepted");
+
+            return await Task.FromResult(true);
+        }
+
+        public override async Task<bool> RejectAsync(string eventId)
+        {
+            await this.UpdateAsync(eventId, "declined");
+
+            return await Task.FromResult(true);
+        }
+
+        private async Task UpdateAsync(string requestedLeaveId, string status)
+        {
+            // Retrieve the event from the API
+            var service = await this.ServiceFactory.GetService(this.LivitConfiguration.AdminEmail, "");
+
+            var updateEvent = service.Events.Get("primary", requestedLeaveId).Execute();
+
+            var admin = updateEvent.Attendees.FirstOrDefault(a => a.Email == this.LivitConfiguration.AdminEmail);
+            admin.ResponseStatus = status;
+
+            await service.Events.Update(updateEvent, "primary", updateEvent.Id).ExecuteAsync();
+        }
+
         private void UpdateDefaultEvent(Event googleEvent)
         {
             // Add admin to attendee to notification & approvement
-            googleEvent.Attendees.Add(new EventAttendee()
+            googleEvent.Attendees.Add(new EventAttendee
             {
                 Email = LivitConfiguration.AdminEmail
             });

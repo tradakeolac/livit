@@ -34,7 +34,7 @@ namespace Livit.Web.Api.Controllers
 
             var request = this.ObjectFactory.Create<LeaveServiceObject>(leave);
 
-            var result = await this.LeaveManagementService.AddLeaveRequest(request);
+            var result = await this.LeaveManagementService.RequestLeaveAsync(request);
 
             return Ok(result);
         }
