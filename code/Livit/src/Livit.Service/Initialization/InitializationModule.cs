@@ -8,7 +8,7 @@
     {
         public void Initialize(InitializationContext context)
         {
-            context.Services.AddScoped<IUserService, UserService>();
+
         }
 
         public void UnInitialize(InitializationContext context)

@@ -1,6 +1,7 @@
 ﻿namespace Livit.Service.Google.Calendar
 {
     using global::Google.Apis.Calendar.v3.Data;
+    using global::Google.Apis.Auth.OAuth2.Requests;
     using Livit.Service.Google.Models;
     using System;
     using System.Threading.Tasks;

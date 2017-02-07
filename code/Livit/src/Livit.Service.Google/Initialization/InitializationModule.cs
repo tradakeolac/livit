@@ -8,6 +8,7 @@
     using System.Net.Http;
     using global::Google.Apis.Util.Store;
     using Calendar;
+    using Services;
 
     [Livit.Infrastructure.Attributes.InitializableModule]
     public class InitializationModule : Livit.Infrastructure.Initialization.IInitializableModule
@@ -18,6 +19,7 @@
             context.Services.AddScoped<ILeaveManagementService, Google.Calendar.GoogleCalendarServiceAdapter>();
             context.Services.AddSingleton<HttpClient, HttpClient>();
             context.Services.AddScoped<IGoogleCalendarServiceFactory, GoogleCalendarServiceFactory>();
+            context.Services.AddScoped<IAuthenticationService, GoogleAuthenticationService>();
         }
 
         public void UnInitialize(InitializationContext context)

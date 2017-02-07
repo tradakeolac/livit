@@ -15,6 +15,7 @@ namespace Livit.Web.Api
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseUrls("http://localhost:64493")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();

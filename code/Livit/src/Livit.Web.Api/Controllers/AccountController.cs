@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Livit.Service;
 using Livit.Web.ViewModel;
+using System.Net;
 
 namespace Livit.Web.Api.Controllers
 {
@@ -12,9 +13,9 @@ namespace Livit.Web.Api.Controllers
     [Route("api/v{version:apiVersion}/account")]
     public class AccountController : Controller
     {
-        protected readonly IUserService UserService;
+        protected readonly IAuthenticationService UserService;
 
-        public AccountController(IUserService userService)
+        public AccountController(IAuthenticationService userService)
         {
             this.UserService = userService;
         }
@@ -25,14 +26,14 @@ namespace Livit.Web.Api.Controllers
         {
             var url = await UserService.GetGrantToManageLeaveRequests();
 
-            return Ok(new CalendarManagementGrantedUrlViewModel { Url = url });
+            return Ok(new LoginViewModel { Uri = url });
         }
 
-        [Route("callback")]
+        [Route("googleCallback")]
         [HttpGet]
-        public async Task<IActionResult> Callback(string code)
+        public async Task<IActionResult> GoogleCallback(string code)
         {
-            return null;
+            return await Task.FromResult(Ok(this.UserService.Authorize(code)));
         }
     }
 }

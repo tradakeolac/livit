@@ -2,8 +2,9 @@
 namespace Livit.Service
 {
 
-    public interface IUserService : IService
+    public interface IAuthenticationService : IService
     {
         Task<string> GetGrantToManageLeaveRequests();
+        Task<bool> Authorize(string authorizationCode);
     }
 }
