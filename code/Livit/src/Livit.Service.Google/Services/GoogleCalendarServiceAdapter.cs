@@ -1,4 +1,4 @@
-﻿namespace Livit.Service.Google.Calendar
+﻿namespace Livit.Service.Google.Services
 {
     using global::Google.Apis.Calendar.v3.Data;
     using global::Google.Apis.Auth.OAuth2.Requests;
@@ -43,7 +43,7 @@
             this.UpdateDefaultEvent(newEvent);
 
             string calendarId = "primary";
-            var service = await this.ServiceFactory.GetService(leaveObject.EmployeeEmail, leaveObject.AuthorizeCode);
+            var service = await this.ServiceFactory.GetService(leaveObject.EmployeeEmail);
 
             Event createdEvent = null;
 
@@ -78,7 +78,7 @@
         private async Task UpdateAsync(string requestedLeaveId, string status)
         {
             // Retrieve the event from the API
-            var service = await this.ServiceFactory.GetService(this.LivitConfiguration.AdminEmail, "");
+            var service = await this.ServiceFactory.GetService(this.LivitConfiguration.AdminEmail);
 
             var updateEvent = service.Events.Get("primary", requestedLeaveId).Execute();
 

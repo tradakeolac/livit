@@ -37,5 +37,15 @@ namespace Livit.Infrastructure.Configurations
                 };
             }
         }
+
+        public string[] CalendarScopes
+        {
+            get
+            {
+                var scopes = Configuration.GetValue<string>("CalendarScopes");
+
+                return !string.IsNullOrEmpty(scopes) ? scopes.Split(',') : null;
+            }
+        }
     }
 }

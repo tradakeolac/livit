@@ -1,6 +1,6 @@
-﻿namespace Livit.Service.Google.Models
+﻿using Newtonsoft.Json;
+namespace Livit.Service.Google.Models
 {
-    using Newtonsoft.Json;
 
     public class TokenEntity
     {

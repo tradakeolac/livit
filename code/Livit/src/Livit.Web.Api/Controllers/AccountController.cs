@@ -10,7 +10,7 @@ using System.Net;
 namespace Livit.Web.Api.Controllers
 {
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/account")]
+    [Route("api/v{version:apiVersion}")]
     public class AccountController : Controller
     {
         protected readonly IAuthenticationService UserService;
@@ -20,7 +20,7 @@ namespace Livit.Web.Api.Controllers
             this.UserService = userService;
         }
 
-        [Route("grantedCalendarUrl")]
+        [Route("oauth2/authorize")]
         [HttpGet]
         public async Task<IActionResult> GetLoginUrl()
         {
@@ -29,7 +29,7 @@ namespace Livit.Web.Api.Controllers
             return Ok(new LoginViewModel { Uri = url });
         }
 
-        [Route("googleCallback")]
+        [Route("oauth2/callback")]
         [HttpGet]
         public async Task<IActionResult> GoogleCallback(string code)
         {

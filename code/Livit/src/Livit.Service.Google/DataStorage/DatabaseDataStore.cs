@@ -29,7 +29,7 @@
 
         public async Task DeleteAsync<T>(string key)
         {
-            var entity = await this.DataLoader.GetByIdAsync<TokenResponseEntity>(key);
+            var entity = await DataLoader.GetByIdAsync<TokenResponseEntity>(key);
             this.Repository.Delete(entity);
             await this.UnitOfWork.SaveChangeAsync();
         }
