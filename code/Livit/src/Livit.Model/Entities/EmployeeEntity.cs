@@ -1,6 +1,5 @@
 ﻿namespace Livit.Model.Entities
 {
-    using System.Collections;
     using System.Collections.Generic;
 
     public class EmployeeEntity : EntityBase<int>

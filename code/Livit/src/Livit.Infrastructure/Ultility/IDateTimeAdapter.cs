@@ -1,5 +1,4 @@
-﻿
-namespace Livit.Infrastructure.Ultility
+﻿namespace Livit.Infrastructure.Ultility
 {
     using System;
 

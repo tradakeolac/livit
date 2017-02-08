@@ -1,17 +1,16 @@
 ﻿namespace Livit.Service.Google.Services
 {
-    using global::Google.Apis.Calendar.v3.Data;
-    using global::Google.Apis.Auth.OAuth2.Requests;
-    using Livit.Service.Google.Models;
-    using System;
-    using System.Threading.Tasks;
     using Data.Repositories;
-    using Model.ServiceObjects;
-    using global::Google.Apis.Util.Store;
     using Exceptions;
+    using global::Google.Apis.Calendar.v3.Data;
+    using global::Google.Apis.Util.Store;
     using Infrastructure.Configurations;
     using Infrastructure.Ultility;
+    using Livit.Service.Google.Models;
+    using Model.ServiceObjects;
+    using System;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class GoogleCalendarServiceAdapter : LeaveManagementService, ILeaveManagementService
     {

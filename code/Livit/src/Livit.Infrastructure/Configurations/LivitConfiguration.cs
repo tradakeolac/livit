@@ -1,9 +1,7 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace Livit.Infrastructure.Configurations
 {
-
     public class LivitConfiguration : ILivitConfiguration
     {
         protected readonly IConfiguration Configuration;

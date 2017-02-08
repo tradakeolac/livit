@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Livit.Service.Exceptions
+﻿namespace Livit.Service.Exceptions
 {
     public class AddActionException : BusinessException
     {

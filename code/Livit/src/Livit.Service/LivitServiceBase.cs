@@ -1,8 +1,6 @@
 ﻿namespace Livit.Service
 {
     using Livit.Data.Repositories;
-    using Livit.Data.Specifications;
-    using Livit.Model;
 
     public abstract class LivitServiceBase
     {

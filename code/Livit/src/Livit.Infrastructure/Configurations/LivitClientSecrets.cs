@@ -1,8 +1,5 @@
-﻿using System.Linq;
-
-namespace Livit.Infrastructure.Configurations
+﻿namespace Livit.Infrastructure.Configurations
 {
-
     public class LivitClientSecrets
     {
         public string ClientId { get; set; }

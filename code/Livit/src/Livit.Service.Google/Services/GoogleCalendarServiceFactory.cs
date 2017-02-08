@@ -1,21 +1,20 @@
 ﻿namespace Livit.Service.Google.Services
 {
     using global::Google.Apis.Auth.OAuth2;
-    using global::Google.Apis.Auth.OAuth2.Flows;
     using global::Google.Apis.Auth.OAuth2.Responses;
     using global::Google.Apis.Calendar.v3;
     using global::Google.Apis.Services;
     using global::Google.Apis.Util.Store;
+    using Infrastructure.Configurations;
     using Livit.Model.Entities;
     using Models;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Infrastructure.Configurations;
 
     public class GoogleCalendarServiceFactory : IGoogleCalendarServiceFactory
     {
-        static readonly string[] Scopes = { CalendarService.Scope.Calendar };
-        static string ApplicationName = "Livit Leave Management Application";
+        private static readonly string[] Scopes = { CalendarService.Scope.Calendar };
+        private static string ApplicationName = "Livit Leave Management Application";
 
         protected readonly IDataStore DataStore;
         protected readonly IGoogleObjectFactory ObjectFactory;

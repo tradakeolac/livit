@@ -1,8 +1,8 @@
 ﻿namespace Livit.Data.Specifications
 {
+    using Livit.Data.Extensions;
     using System;
     using System.Linq.Expressions;
-    using Livit.Data.Extensions;
 
     public class OrSpecification<T> : CompositeSpecification<T>
     {

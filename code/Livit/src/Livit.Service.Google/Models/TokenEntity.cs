@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
+
 namespace Livit.Service.Google.Models
 {
-
     public class TokenEntity
     {
         [JsonProperty("access_token")]

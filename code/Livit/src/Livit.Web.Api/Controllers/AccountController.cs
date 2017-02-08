@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Livit.Service;
+﻿using Livit.Service;
 using Livit.Web.ViewModel;
-using System.Net;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Livit.Web.Api.Controllers
 {

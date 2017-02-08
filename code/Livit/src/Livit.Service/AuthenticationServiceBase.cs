@@ -1,8 +1,8 @@
 ﻿namespace Livit.Service
 {
-    using System.Threading.Tasks;
     using Data.Repositories;
     using Infrastructure.Configurations;
+    using System.Threading.Tasks;
 
     public abstract class AuthenticationServiceBase : LivitServiceBase, IAuthenticationService
     {
@@ -16,6 +16,7 @@
         }
 
         public abstract Task Authorize(string authorizationCode);
+
         public abstract Task<string> GetGrantToManageLeaveRequests();
     }
 }

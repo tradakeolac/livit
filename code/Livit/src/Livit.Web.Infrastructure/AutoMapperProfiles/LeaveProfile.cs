@@ -15,7 +15,6 @@
                 .ForMember(m => m.Employee, obj => obj.Ignore())
                 .ForMember(m => m.ApprovedDate, obj => obj.Ignore());
 
-
             CreateMap<LeaveServiceObject, Event>()
                 .ForMember(m => m.Summary, obj => obj.MapFrom(src => src.Summary))
                 .ForMember(m => m.Description, obj => obj.MapFrom(src => src.Description))
@@ -40,7 +39,6 @@
                     new EventAttendee { Email = src.EmployeeEmail }
                 }))
                 .ForAllOtherMembers(src => src.Ignore());
-
 
             CreateMap<LeaveRequestViewModel, LeaveServiceObject>()
                 .ForMember(m => m.Id, obj => obj.Ignore());

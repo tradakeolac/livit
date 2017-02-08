@@ -1,5 +1,4 @@
-﻿
-namespace Livit.Web.Infrastructure.AutoMapperProfiles
+﻿namespace Livit.Web.Infrastructure.AutoMapperProfiles
 {
     using Google.Apis.Auth.OAuth2.Responses;
     using Livit.Model.Entities;

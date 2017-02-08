@@ -1,9 +1,9 @@
 ﻿namespace Livit.Service.Google.Initialization
 {
-    using Infrastructure.Initialization;
-    using System.Net.Http;
     using global::Google.Apis.Util.Store;
+    using Infrastructure.Initialization;
     using Services;
+    using System.Net.Http;
 
     [Livit.Infrastructure.Attributes.InitializableModule]
     public class InitializationModule : Livit.Infrastructure.Initialization.IInitializableModule

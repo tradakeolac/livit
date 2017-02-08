@@ -1,6 +1,5 @@
 ﻿namespace Livit.Web.Infrastructure.Initialization
 {
-    using System;
     using AutoMapper;
     using Livit.Infrastructure.Attributes;
     using Livit.Infrastructure.Initialization;
@@ -22,7 +21,6 @@
 
         public void UnInitialize(InitializationContext context)
         {
-
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿
-namespace Livit.Data.Specifications
+﻿namespace Livit.Data.Specifications
 {
     using System;
     using System.Linq.Expressions;
 
     public class ExpressionSpecification<T> : ExpressionSpecificationBase<T>
     {
-        readonly Expression<Func<T, bool>> expression;
+        private readonly Expression<Func<T, bool>> expression;
+
         public ExpressionSpecification(Expression<Func<T, bool>> expression)
         {
             if (expression == null)

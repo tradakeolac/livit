@@ -6,7 +6,6 @@
     {
         public AutofacInitializationContext(ILivitServiceCollection services) : base(services)
         {
-
         }
     }
 }

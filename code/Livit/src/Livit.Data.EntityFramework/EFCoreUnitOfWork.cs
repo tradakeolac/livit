@@ -1,27 +1,25 @@
 ﻿namespace Livit.Data.EntityFramework
 {
+    using Livit.Data.Repositories;
     using System;
     using System.Threading.Tasks;
-    using Livit.Data.Repositories;
-    using Microsoft.EntityFrameworkCore;
 
-    /// <summary> 
-    /// The Entity Framework implementation of IUnitOfWork 
-    /// </summary> 
+    /// <summary>
+    /// The Entity Framework implementation of IUnitOfWork
+    /// </summary>
     public sealed class EFCoreUnitOfWork : IUnitOfWork, IAsyncUnitOfWork
     {
-        /// <summary> 
-        /// The DbContext 
-        /// </summary> 
+        /// <summary>
+        /// The DbContext
+        /// </summary>
         private LivitDbContext _dbContext;
 
-        /// <summary> 
-        /// Initializes a new instance of the UnitOfWork class. 
-        /// </summary> 
-        /// <param name="context">The object context</param> 
+        /// <summary>
+        /// Initializes a new instance of the UnitOfWork class.
+        /// </summary>
+        /// <param name="context">The object context</param>
         public EFCoreUnitOfWork(LivitDbContext context)
         {
-
             _dbContext = context;
         }
 
@@ -51,9 +49,9 @@
                 _dbContext.Database.CurrentTransaction.Commit();
         }
 
-        /// <summary> 
-        /// Disposes the current object 
-        /// </summary> 
+        /// <summary>
+        /// Disposes the current object
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
@@ -65,7 +63,7 @@
         /// </summary>
         public void RollBackTransaction()
         {
-            // Save changes with the default options 
+            // Save changes with the default options
             _dbContext.Database.CurrentTransaction.Rollback();
         }
 
@@ -79,14 +77,14 @@
         /// </summary>
         public void SaveChanges()
         {
-            // Save changes with the default options 
+            // Save changes with the default options
             _dbContext.SaveChanges();
         }
 
-        /// <summary> 
-        /// Disposes all external resources. 
-        /// </summary> 
-        /// <param name="disposing">The dispose indicator.</param> 
+        /// <summary>
+        /// Disposes all external resources.
+        /// </summary>
+        /// <param name="disposing">The dispose indicator.</param>
         private void Dispose(bool disposing)
         {
             if (disposing)

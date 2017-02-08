@@ -1,21 +1,21 @@
 ﻿namespace Livit.Data.EntityFramework
 {
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Livit.Data.Repositories;
     using Livit.Data.Specifications;
     using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public class EFCoreDataLoader : IDataLoaderRepository, IAsyncDataLoader
     {
         protected LivitDbContext DbContext;
+
         protected DbSet<TEntity> DbSet<TEntity>() where TEntity : class
         {
             return DbContext.Set<TEntity>();
         }
-        
+
         public EFCoreDataLoader(LivitDbContext dbContext)
         {
             this.DbContext = dbContext;
@@ -55,7 +55,7 @@
         {
             return DbSet<TEntity>().Find(id);
         }
-        
+
         public async Task<IEnumerable<TEntity>> FindAsync<TEntity>(ISpecification<TEntity> criteria) where TEntity : class
         {
             return await DbSet<TEntity>().Where(criteria.ToExpression()).ToListAsync();
@@ -75,7 +75,7 @@
         {
             return await this.DbSet<TEntity>().Where(criteria.ToExpression()).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
         }
-        
+
         public async Task<IEnumerable<TEntity>> GetAllAsync<TEntity>() where TEntity : class
         {
             return await DbSet<TEntity>().ToListAsync();

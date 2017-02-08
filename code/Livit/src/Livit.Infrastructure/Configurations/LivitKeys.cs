@@ -1,6 +1,5 @@
 ﻿namespace Livit.Infrastructure.Configurations
 {
-
     public static class LivitKeys
     {
         public const string ClientId = "client_id";

@@ -31,7 +31,6 @@
             );
         }
 
-
         private static ErrorDataModel CreateModel(IExceptionHandlerFeature exceptionFeature)
         {
             var businessException = GetBusinessException(exceptionFeature);

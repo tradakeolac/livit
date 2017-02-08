@@ -1,14 +1,13 @@
 ﻿namespace Livit.Web.Infrastructure.Initialization
 {
-    using System;
+    using Livit.Data.EntityFramework;
+    using Livit.Data.Repositories;
     using Livit.Infrastructure.Attributes;
     using Livit.Infrastructure.Initialization;
     using Livit.Model.Entities;
+    using Livit.Model.ServiceObjects;
     using Livit.Web.Infrastructure.Factories;
     using Livit.Web.ViewModel;
-    using Livit.Model.ServiceObjects;
-    using Livit.Data.Repositories;
-    using Livit.Data.EntityFramework;
     using Service.Google.Models;
 
     [InitializableModule]

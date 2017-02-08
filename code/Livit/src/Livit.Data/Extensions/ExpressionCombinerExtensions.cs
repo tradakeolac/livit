@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Linq.Expressions;
 
-    static class ExpressionCombinerExtensions
+    internal static class ExpressionCombinerExtensions
     {
         public static Expression<Func<T, bool>> AndAlso<T>(this Expression<Func<T, bool>> exp, Expression<Func<T, bool>> newExp)
         {
@@ -46,7 +46,7 @@
             return Expression.Lambda<Func<T, bool>>(binExp, exp.Parameters);
         }
 
-        class ParameterUpdateVisitor : ExpressionVisitor
+        private class ParameterUpdateVisitor : ExpressionVisitor
         {
             private ParameterExpression _oldParameter;
             private ParameterExpression _newParameter;

@@ -8,7 +8,6 @@
     {
         public void Initialize(InitializationContext context)
         {
-
         }
 
         public void UnInitialize(InitializationContext context)

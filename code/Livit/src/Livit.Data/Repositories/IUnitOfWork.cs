@@ -2,34 +2,34 @@
 {
     using System;
 
-    /// <summary> 
-    /// The UnitOfWork interface. 
-    /// </summary> 
+    /// <summary>
+    /// The UnitOfWork interface.
+    /// </summary>
     public interface IUnitOfWork : IDisposable
     {
-        /// <summary> 
-        /// Gets a value indicating whether is in transaction. 
-        /// </summary> 
+        /// <summary>
+        /// Gets a value indicating whether is in transaction.
+        /// </summary>
         bool IsInTransaction { get; }
 
-        /// <summary> 
-        /// The save changes. 
-        /// </summary> 
+        /// <summary>
+        /// The save changes.
+        /// </summary>
         void SaveChanges();
 
-        /// <summary> 
-        /// The begin transaction. 
-        /// </summary> 
+        /// <summary>
+        /// The begin transaction.
+        /// </summary>
         void BeginTransaction();
 
-        /// <summary> 
-        /// The roll back transaction. 
-        /// </summary> 
+        /// <summary>
+        /// The roll back transaction.
+        /// </summary>
         void RollBackTransaction();
 
-        /// <summary> 
-        /// The commit transaction. 
-        /// </summary> 
+        /// <summary>
+        /// The commit transaction.
+        /// </summary>
         void CommitTransaction();
     }
 }

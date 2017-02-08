@@ -1,14 +1,11 @@
 ﻿namespace Livit.Service.Google.Services
 {
-    using System.Threading.Tasks;
+    using Exceptions;
+    using global::Google.Apis.Util.Store;
     using Livit.Data.Repositories;
     using Livit.Infrastructure.Configurations;
-    using Exceptions;
     using System.Net.Http;
-    using global::Google.Apis.Auth.OAuth2.Flows;
-    using global::Google.Apis.Util.Store;
-    using global::Google.Apis.Auth.OAuth2;
-    using global::Google.Apis.Calendar.v3;
+    using System.Threading.Tasks;
 
     public class GoogleAuthenticationService : AuthenticationServiceBase, IAuthenticationService
     {

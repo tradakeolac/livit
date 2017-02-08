@@ -2,7 +2,6 @@
 
 namespace Livit.Service.Google.Models
 {
-
     public class VerifiedTokenResponse
     {
         [JsonProperty("sub")]

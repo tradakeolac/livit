@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Livit.Data.EntityFramework;
+using Livit.Infrastructure.Initialization;
+using Livit.Web.Infrastructure.DependencyInjection;
+using Livit.Web.Infrastructure.ErrorHandling;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Diagnostics;
-using Autofac;
-using Livit.Data.EntityFramework;
-using Microsoft.EntityFrameworkCore;
-using Livit.Infrastructure.Initialization;
-using Autofac.Extensions.DependencyInjection;
-using Livit.Web.Infrastructure.DependencyInjection;
-using System.Net;
-using Newtonsoft.Json;
-using Microsoft.Extensions.Options;
-using Livit.Web.Infrastructure.ErrorHandling;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
 
 namespace Livit.Web.Api
 {

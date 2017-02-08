@@ -3,11 +3,11 @@
     using global::Google.Apis.Auth.OAuth2.Responses;
     using Livit.Infrastructure.Configurations;
     using Livit.Service.Exceptions;
+    using Models;
     using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using Models;
 
     public class TokenService : ITokenService
     {

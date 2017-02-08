@@ -1,5 +1,4 @@
-﻿
-namespace Livit.Data.EntityFramework.Extensions
+﻿namespace Livit.Data.EntityFramework.Extensions
 {
     using Livit.Infrastructure.Helpers;
     using Microsoft.EntityFrameworkCore;

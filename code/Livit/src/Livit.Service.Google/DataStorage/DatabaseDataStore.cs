@@ -1,9 +1,9 @@
 ﻿namespace Livit.Service.Google.DataStorage
 {
-    using System.Threading.Tasks;
+    using global::Google.Apis.Util.Store;
     using Livit.Data.Repositories;
     using Livit.Model.Entities;
-    using global::Google.Apis.Util.Store;
+    using System.Threading.Tasks;
 
     public class DatabaseDataStore : IDataStore
     {

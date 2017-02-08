@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Livit.Model.ServiceObjects;
 using Livit.Service;
-using Livit.Model.ServiceObjects;
 using Livit.Web.ViewModel;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Livit.Web.Api.Controllers
 {
@@ -38,7 +35,5 @@ namespace Livit.Web.Api.Controllers
 
             return Ok(result);
         }
-
-
     }
 }

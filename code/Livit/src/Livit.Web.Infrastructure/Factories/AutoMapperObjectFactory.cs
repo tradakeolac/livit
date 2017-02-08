@@ -25,7 +25,7 @@
             {
                 return mapper.Map<TDestination>(source);
             }
-            catch (Exception ex)
+            catch
             {
                 throw new MappingException($"Can not mapping to type {typeof(TDestination).Name} from source type {source.GetType().Name}");
             }

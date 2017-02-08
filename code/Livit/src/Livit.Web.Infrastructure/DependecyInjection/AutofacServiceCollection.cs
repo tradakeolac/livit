@@ -1,9 +1,9 @@
 ﻿namespace Livit.Web.Infrastructure.DependencyInjection
 {
-    using System;
     using Autofac;
     using Livit.Infrastructure.Initialization;
     using Livit.Infrastructure.Metadata;
+    using System;
     using System.Reflection;
 
     public class AutofacServiceCollection : ILivitServiceCollection
