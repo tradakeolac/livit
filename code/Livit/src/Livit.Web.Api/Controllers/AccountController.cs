@@ -1,6 +1,8 @@
 ﻿using Livit.Service;
 using Livit.Web.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Livit.Web.Api.Controllers
@@ -27,9 +29,17 @@ namespace Livit.Web.Api.Controllers
 
         [Route("oauth2/callback")]
         [HttpGet]
-        public async Task<IActionResult> GoogleCallback(string code)
+        public async Task<IActionResult> GoogleCallback([FromQuery] string code)
         {
-            return await Task.FromResult(Ok(this.UserService.Authorize(code)));
+            var identity = User.Identity as ClaimsIdentity;
+            var externalUserInfo = await this.UserService.Authorize(code);
+
+            if (externalUserInfo != null && identity != null)
+            {
+                identity.AddClaim(new Claim(ClaimTypes.Email, externalUserInfo.Email));
+            }
+
+            return await Task.FromResult(Ok(new { success = true }));
         }
     }
 }

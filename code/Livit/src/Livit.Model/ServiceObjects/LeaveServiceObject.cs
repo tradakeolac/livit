@@ -10,6 +10,5 @@
         public DateTime From { get; set; }
         public DateTime To { get; set; }
         public string Id { get; set; }
-        public string AuthorizeCode { get; set; }
     }
 }

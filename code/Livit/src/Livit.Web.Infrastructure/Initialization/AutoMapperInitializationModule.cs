@@ -14,6 +14,7 @@
             {
                 cfg.AddProfile<LeaveProfile>();
                 cfg.AddProfile<TokenProfile>();
+                cfg.AddProfile<UserProfile>();
             });
 
             context.Services.AddSingleton<IMapper>(configuration.CreateMapper());

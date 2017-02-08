@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Livit.Model.ServiceObjects;
+using System.Threading.Tasks;
 
 namespace Livit.Service
 {
@@ -6,6 +7,6 @@ namespace Livit.Service
     {
         Task<string> GetGrantToManageLeaveRequests();
 
-        Task Authorize(string authorizationCode);
+        Task<ExternalUserServiceObject> Authorize(string authorizationCode);
     }
 }

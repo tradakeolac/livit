@@ -1,8 +1,10 @@
 ﻿namespace Livit.Service.Google.DataStorage
 {
     using global::Google.Apis.Util.Store;
+    using Infrastructure.Ultility;
     using Livit.Data.Repositories;
     using Livit.Model.Entities;
+    using System;
     using System.Threading.Tasks;
 
     public class DatabaseDataStore : IDataStore
@@ -11,15 +13,17 @@
         protected readonly IRepository Repository;
         protected readonly IAsyncUnitOfWork UnitOfWork;
         protected readonly IEntityFactory EntityFactory;
+        protected readonly IDateTimeAdapter DateTimeAdapter;
 
         public DatabaseDataStore(IAsyncUnitOfWork unitOfWork,
             IRepository repository, IAsyncDataLoader dataLoader,
-            IEntityFactory entityFactory)
+            IEntityFactory entityFactory, IDateTimeAdapter dateTimeAdapter)
         {
             this.DataLoader = dataLoader;
             this.UnitOfWork = unitOfWork;
             this.Repository = repository;
             this.EntityFactory = entityFactory;
+            this.DateTimeAdapter = dateTimeAdapter;
         }
 
         public Task ClearAsync()
@@ -43,6 +47,9 @@
         public async Task StoreAsync<T>(string key, T value)
         {
             var token = this.EntityFactory.Create<TokenResponseEntity>(value);
+
+            if (token.Issued == this.DateTimeAdapter.Min)
+                token.Issued = this.DateTimeAdapter.Now;
 
             var dbEntity = await this.DataLoader.GetByIdAsync<TokenResponseEntity>(key);
 

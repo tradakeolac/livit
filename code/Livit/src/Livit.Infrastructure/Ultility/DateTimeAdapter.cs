@@ -17,6 +17,22 @@
             get { return this.Configuration.DefaultTimeZone; }
         }
 
+        public DateTime Max
+        {
+            get
+            {
+                return DateTime.MaxValue;
+            }
+        }
+
+        public DateTime Min
+        {
+            get
+            {
+                return DateTime.MinValue;
+            }
+        }
+
         public DateTime Now
         {
             get { return DateTime.Now; }

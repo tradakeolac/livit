@@ -1,6 +1,7 @@
 ﻿using Livit.Model.ServiceObjects;
 using Livit.Service;
 using Livit.Web.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -33,7 +34,18 @@ namespace Livit.Web.Api.Controllers
 
             var result = await this.LeaveManagementService.RequestLeaveAsync(request);
 
-            return Ok(result);
+            return Created("api/v1/leaves", result);
+        }
+
+        [HttpPost]
+        [Route("{id}")]
+        public async Task<IActionResult> Approve([FromRoute] string id, [FromBody] ChangeStatusLeaveViewModel payload)
+        {
+            var result = payload != null && payload.IsAccepted
+                ? await this.LeaveManagementService.ApproveAsync(id)
+                : await this.LeaveManagementService.RejectAsync(id);
+
+            return Ok(new { success = result });
         }
     }
 }

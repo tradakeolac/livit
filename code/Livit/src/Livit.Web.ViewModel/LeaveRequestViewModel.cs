@@ -22,7 +22,5 @@
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime To { get; set; }
-
-        public string AuthorizeCode { get; set; }
     }
 }

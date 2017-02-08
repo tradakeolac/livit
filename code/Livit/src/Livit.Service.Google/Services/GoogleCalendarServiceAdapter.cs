@@ -34,7 +34,7 @@
             this.LivitConfiguration = configuration;
         }
 
-        public override async Task<bool> RequestLeaveAsync(LeaveServiceObject leaveObject)
+        public override async Task<LeaveServiceObject> RequestLeaveAsync(LeaveServiceObject leaveObject)
         {
             var newEvent = this.ObjectFactory.Create<Event>(leaveObject);
 
@@ -57,7 +57,7 @@
                 throw new AddActionException("Can not add the event to the Google calendar!");
             }
 
-            return await Task.FromResult<bool>(createdEvent != null);
+            return await Task.FromResult(this.ObjectFactory.Create<LeaveServiceObject>(createdEvent));
         }
 
         public override async Task<bool> ApproveAsync(string eventId)

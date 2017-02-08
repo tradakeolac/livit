@@ -15,6 +15,6 @@
 
         public abstract Task<bool> RejectAsync(string eventId);
 
-        public abstract Task<bool> RequestLeaveAsync(LeaveServiceObject leaveObject);
+        public abstract Task<LeaveServiceObject> RequestLeaveAsync(LeaveServiceObject leaveObject);
     }
 }

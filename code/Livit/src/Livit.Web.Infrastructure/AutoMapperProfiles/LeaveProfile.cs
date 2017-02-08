@@ -3,6 +3,7 @@
     using Google.Apis.Calendar.v3.Data;
     using Livit.Model.Entities;
     using Livit.Model.ServiceObjects;
+    using System.Linq;
     using ViewModel;
 
     public class LeaveProfile : AutoMapper.Profile
@@ -14,6 +15,11 @@
                 .ForMember(m => m.EmployeeId, obj => obj.Ignore())
                 .ForMember(m => m.Employee, obj => obj.Ignore())
                 .ForMember(m => m.ApprovedDate, obj => obj.Ignore());
+
+            CreateMap<Event, LeaveServiceObject>()
+                .ForMember(m => m.EmployeeEmail, obj => obj.MapFrom(src => src.Attendees.First()))
+                .ForMember(m => m.From, obj => obj.MapFrom(src => src.Start.DateTime))
+                .ForMember(m => m.To, obj => obj.MapFrom(src => src.End.DateTime));
 
             CreateMap<LeaveServiceObject, Event>()
                 .ForMember(m => m.Summary, obj => obj.MapFrom(src => src.Summary))

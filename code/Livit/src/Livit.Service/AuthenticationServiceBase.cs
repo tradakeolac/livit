@@ -2,6 +2,7 @@
 {
     using Data.Repositories;
     using Infrastructure.Configurations;
+    using Model.ServiceObjects;
     using System.Threading.Tasks;
 
     public abstract class AuthenticationServiceBase : LivitServiceBase, IAuthenticationService
@@ -15,7 +16,7 @@
             this.Configuration = configuration;
         }
 
-        public abstract Task Authorize(string authorizationCode);
+        public abstract Task<ExternalUserServiceObject> Authorize(string authorizationCode);
 
         public abstract Task<string> GetGrantToManageLeaveRequests();
     }
