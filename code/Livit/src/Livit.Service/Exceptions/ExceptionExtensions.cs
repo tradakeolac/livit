@@ -1,12 +1,14 @@
-﻿using System;
-
-namespace Livit.Service.Exceptions
+﻿namespace Livit.Service.Exceptions
 {
+    using System;
+    using System.Reflection;
+
     public static class ExceptionExtensions
     {
-        public static BusinessException ToBusinessException(this Exception exception)
+        public static TBusinessException ToBusinessException<TBusinessException>(this Exception exception, string message)
+            where TBusinessException : BusinessException
         {
-            return new UnKnowBusinessException("Internal server error occurred");
+            return Activator.CreateInstance(typeof(TBusinessException), message, exception) as TBusinessException;
         }
     }
 }

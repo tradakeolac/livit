@@ -10,6 +10,8 @@
 
     public static class ErrorConfigurationExtensions
     {
+        private static readonly NLog.ILogger _logger = NLog.LogManager.GetLogger("NLog");
+
         public static void UseContentNegotiateExceptionHandling(this IApplicationBuilder app)
         {
             app.UseExceptionHandler(
@@ -24,6 +26,7 @@
                      if (ex != null)
                      {
                          var err = JsonConvert.SerializeObject(CreateModel(ex));
+
                          await context.Response.WriteAsync(err).ConfigureAwait(false);
                      }
                  });
@@ -34,6 +37,9 @@
         private static ErrorDataModel CreateModel(IExceptionHandlerFeature exceptionFeature)
         {
             var businessException = GetBusinessException(exceptionFeature);
+
+            // Log
+            _logger.Error(businessException.InnerException, businessException.Message);
 
             return new ErrorDataModel
             {
@@ -48,12 +54,15 @@
 
         private static BusinessException GetBusinessException(IExceptionHandlerFeature exceptionFeature)
         {
-            if (exceptionFeature != null && exceptionFeature.Error != null && exceptionFeature.Error is BusinessException)
+            if (exceptionFeature != null && exceptionFeature.Error != null)
             {
-                return (BusinessException)exceptionFeature.Error;
+                if (exceptionFeature.Error is BusinessException)
+                    return (BusinessException)exceptionFeature.Error;
+                else
+                    return exceptionFeature.Error.ToBusinessException<UnKnowBusinessException>("Internal server error occurred.");
             }
 
-            return new UnKnowBusinessException("Internal server error occurred.");
+            return new Exception().ToBusinessException<UnKnowBusinessException>("Internal server error occurred.");
         }
     }
 }

@@ -54,7 +54,7 @@
             }
             catch (Exception ex)
             {
-                throw new AddActionException("Can not add the event to the Google calendar!");
+                throw ex.ToBusinessException<AddActionException>("Can not add the event to the Google calendar!");
             }
 
             var responseEvent = this.ObjectFactory.Create<LeaveServiceObject>(createdEvent);

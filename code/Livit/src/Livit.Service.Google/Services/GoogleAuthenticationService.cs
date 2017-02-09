@@ -40,13 +40,13 @@
 
         public async override Task<ExternalUserServiceObject> Authorize(string authorizationCode)
         {
-            if (string.IsNullOrWhiteSpace(authorizationCode))
-                throw new RequestArgumentNullException("The authorized_code is NULL.");
+            Guard.EnsureStringNotNullOrEmpty(authorizationCode, nameof(authorizationCode));
 
             var token = await this.TokenService.FetchToken(authorizationCode);
 
             if (token == null)
-                throw new CommonException("Can not get the access_token.");
+                throw new System.NullReferenceException()
+                    .ToBusinessException<CommonException>("Can not get the access_token.");
 
             var tokenInfo = await this.TokenService.VerifyToken(token.IdToken);
 

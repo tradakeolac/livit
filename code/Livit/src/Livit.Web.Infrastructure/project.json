@@ -12,7 +12,8 @@
     "Livit.Service.Google": "1.0.0-*",
     "Livit.Web.ViewModel": "1.0.0-*",
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
-    "NETStandard.Library": "1.6.1"
+    "NETStandard.Library": "1.6.1",
+    "NLog.Web.AspNetCore": "4.3.0"
   },
 
   "frameworks": {

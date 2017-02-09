@@ -6,10 +6,13 @@ using Livit.Web.Infrastructure.DependencyInjection;
 using Livit.Web.Infrastructure.ErrorHandling;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using NLog.Web;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 
@@ -26,6 +29,9 @@ namespace Livit.Web.Api
                 .AddJsonFile("client_secret.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            // Logs
+            env.ConfigureNLog("nlog.config");
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -39,6 +45,8 @@ namespace Livit.Web.Api
             // Add services to the collection.
             services.AddMvc()
                 .AddControllersAsServices();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Register the Swagger generator, defining one or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -80,6 +88,12 @@ namespace Livit.Web.Api
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+            //add NLog to ASP.NET Core
+            loggerFactory.AddNLog();
+
+            //add NLog.Web
+            app.AddNLogWeb();
 
             // Add error handling
             app.UseContentNegotiateExceptionHandling();

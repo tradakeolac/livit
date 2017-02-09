@@ -1,8 +1,10 @@
-﻿namespace Livit.Service.Exceptions
+﻿using System;
+
+namespace Livit.Service.Exceptions
 {
     public class UnKnowBusinessException : BusinessException
     {
-        public UnKnowBusinessException(string message) : base(message)
+        public UnKnowBusinessException(string message, Exception inner) : base(message, inner)
         {
         }
 

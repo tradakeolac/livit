@@ -1,8 +1,10 @@
-﻿namespace Livit.Service.Exceptions
+﻿using System;
+
+namespace Livit.Service.Exceptions
 {
     public class NotFoundServiceException : BusinessException
     {
-        public NotFoundServiceException(string message) : base(message)
+        public NotFoundServiceException(string message, Exception inner) : base(message, inner)
         {
         }
 

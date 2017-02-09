@@ -24,8 +24,7 @@
 
         public async Task<TokenResponse> FetchToken(string authorizeCode)
         {
-            if (string.IsNullOrWhiteSpace(authorizeCode))
-                throw new RequestArgumentNullException("The authorized_code is NULL.");
+            Guard.EnsureStringNotNullOrEmpty(authorizeCode, nameof(authorizeCode));
 
             var dic = new Dictionary<string, string>
             {
@@ -55,8 +54,7 @@
 
         public async Task<VerifiedTokenResponse> VerifyToken(string idToken)
         {
-            if (string.IsNullOrEmpty(idToken))
-                throw new RequestArgumentNullException("Id token can not be null.");
+            Guard.EnsureStringNotNullOrEmpty(idToken, nameof(idToken));
 
             var response = await this.HttpClient.GetAsync(string.Format(GoogleApiTokenInfoUrl, idToken));
             response.EnsureSuccessStatusCode();

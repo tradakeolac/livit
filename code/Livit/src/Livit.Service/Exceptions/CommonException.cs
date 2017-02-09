@@ -1,8 +1,10 @@
-﻿namespace Livit.Service.Exceptions
+﻿using System;
+
+namespace Livit.Service.Exceptions
 {
     public class CommonException : BusinessException
     {
-        public CommonException(string message) : base(message)
+        public CommonException(string message, Exception inner) : base(message, inner)
         {
         }
 

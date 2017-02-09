@@ -1,8 +1,10 @@
-﻿namespace Livit.Service.Exceptions
+﻿using System;
+
+namespace Livit.Service.Exceptions
 {
     public class UpdateActionException : BusinessException
     {
-        public UpdateActionException(string message) : base(message)
+        public UpdateActionException(string message, Exception inner) : base(message, inner)
         {
         }
 
