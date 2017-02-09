@@ -18,7 +18,7 @@ namespace Livit.Service.Exceptions
         {
             get
             {
-                return $"http://api.liv.it/references/errors/{Type.ToLower()}";
+                return $"http://api.liv.it/references/errors/{Type.ToLower()}.html";
             }
         }
     }
