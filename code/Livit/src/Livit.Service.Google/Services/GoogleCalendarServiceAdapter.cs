@@ -57,7 +57,10 @@
                 throw new AddActionException("Can not add the event to the Google calendar!");
             }
 
-            return await Task.FromResult(this.ObjectFactory.Create<LeaveServiceObject>(createdEvent));
+            var responseEvent = this.ObjectFactory.Create<LeaveServiceObject>(createdEvent);
+            responseEvent.EmployeeEmail = leaveObject.EmployeeEmail;
+
+            return await Task.FromResult(responseEvent);
         }
 
         public override async Task<bool> ApproveAsync(string eventId)

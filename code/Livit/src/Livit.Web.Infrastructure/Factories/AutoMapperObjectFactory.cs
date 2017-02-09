@@ -19,7 +19,7 @@
 
         public TDestination Create<TDestination>(object source)
         {
-            Guard.EnsureRequestNotNull(source, nameof(source));
+            Guard.EnsureRequestNotNull(source, nameof(source) + $" map to type {typeof(TDestination).Name}");
 
             try
             {

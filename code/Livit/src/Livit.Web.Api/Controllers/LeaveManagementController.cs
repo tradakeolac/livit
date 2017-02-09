@@ -13,11 +13,14 @@ namespace Livit.Web.Api.Controllers
     {
         protected readonly ILeaveManagementService LeaveManagementService;
         protected readonly IServiceObjectFactory ObjectFactory;
+        protected readonly IViewModelFactory ViewModelFactory;
 
-        public LeaveManagementController(ILeaveManagementService leaveService, IServiceObjectFactory objectFactory)
+        public LeaveManagementController(ILeaveManagementService leaveService,
+            IServiceObjectFactory objectFactory, IViewModelFactory viewModelFactory)
         {
             this.LeaveManagementService = leaveService;
             this.ObjectFactory = objectFactory;
+            this.ViewModelFactory = viewModelFactory;
         }
 
         [HttpPost]
@@ -34,7 +37,7 @@ namespace Livit.Web.Api.Controllers
 
             var result = await this.LeaveManagementService.RequestLeaveAsync(request);
 
-            return Created("api/v1/leaves", result);
+            return Created("api/v1/leaves", this.ViewModelFactory.Create<LeaveResponseViewModel>(result));
         }
 
         [HttpPost]

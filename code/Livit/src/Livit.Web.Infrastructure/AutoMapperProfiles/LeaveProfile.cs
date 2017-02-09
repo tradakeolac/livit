@@ -17,7 +17,7 @@
                 .ForMember(m => m.ApprovedDate, obj => obj.Ignore());
 
             CreateMap<Event, LeaveServiceObject>()
-                .ForMember(m => m.EmployeeEmail, obj => obj.MapFrom(src => src.Attendees.First()))
+                .ForMember(m => m.EmployeeEmail, obj => obj.Ignore())
                 .ForMember(m => m.From, obj => obj.MapFrom(src => src.Start.DateTime))
                 .ForMember(m => m.To, obj => obj.MapFrom(src => src.End.DateTime));
 
@@ -48,6 +48,8 @@
 
             CreateMap<LeaveRequestViewModel, LeaveServiceObject>()
                 .ForMember(m => m.Id, obj => obj.Ignore());
+
+            CreateMap<LeaveServiceObject, LeaveResponseViewModel>();
         }
     }
 }

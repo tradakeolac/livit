@@ -23,4 +23,9 @@
         [DataType(DataType.DateTime)]
         public DateTime To { get; set; }
     }
+
+    public class LeaveResponseViewModel : LeaveRequestViewModel
+    {
+        public string Id { get; set; }
+    }
 }
