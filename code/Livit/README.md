@@ -7,6 +7,8 @@
 
    Open solution in Visual Studio 2015.
 
+   Update the admin email on "src\Livit.Web.Api\appsettings.json"
+
    Open "View -> Other Windows -> Package Console".
 
    Select Default project is "src\Livit.Data.EntityFramework".
