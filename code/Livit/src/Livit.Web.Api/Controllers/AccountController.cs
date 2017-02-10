@@ -24,8 +24,6 @@ namespace Livit.Web.Api.Controllers
         {
             var url = await UserService.GetGrantToManageLeaveRequests();
 
-            throw new ArgumentNullException("halla");
-
             return Ok(new LoginViewModel { Uri = url });
         }
 
